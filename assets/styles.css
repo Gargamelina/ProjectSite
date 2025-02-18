@@ -1,0 +1,298 @@
+/* Общий стиль */
+body {
+	font-family: 'Arial', sans-serif;
+	margin: 0;
+	padding: 0;
+	background: #000; /* Черный фон */
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	min-height: 100vh;
+	overflow-x: hidden;
+	position: relative;
+}
+
+/* Фон видео */
+.video-background {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	object-fit: cover;
+	filter: brightness(0.3);
+}
+
+/* Основной контейнер */
+.container {
+	max-width: 900px;
+	width: 90%;
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 12px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+	padding: 20px;
+	margin: 30px auto;
+	animation: fadeIn 1s ease-in-out;
+	backdrop-filter: blur(10px);
+	text-align: center;
+}
+
+/* Заголовки */
+h1,
+h2 {
+	color: #ffffff;
+	text-align: center;
+	margin-bottom: 20px;
+	text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+	font-size: 2.5rem;
+}
+
+h2 {
+	font-size: 1.8rem;
+	margin-top: 10px;
+}
+
+/* Ссылки */
+a {
+	color: #4da8da;
+	text-decoration: none;
+	font-weight: bold;
+	transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+	color: #33bbff;
+}
+
+/* Кнопки */
+button,
+.btn {
+	background-color: rgba(0, 123, 255, 0.8);
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+button:hover,
+.btn:hover {
+	background-color: rgba(0, 123, 255, 1);
+	transform: scale(1.05);
+}
+
+button:active,
+.btn:active {
+	transform: scale(1);
+}
+
+/* Кнопка удаления */
+.btn-delete {
+	background-color: rgba(255, 77, 77, 0.8);
+}
+
+.btn-delete:hover {
+	background-color: rgba(255, 77, 77, 1);
+}
+
+/* Форма */
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'],
+input[type='file'] {
+	padding: 10px;
+	border: 1px solid #555;
+	border-radius: 8px;
+	margin: 10px 0;
+	font-size: 16px;
+	background: rgba(255, 255, 255, 0.1);
+	color: #fff;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out, border-color 0.3s;
+}
+
+input[type='text']:hover,
+input[type='password']:hover,
+input[type='email']:hover,
+input[type='file']:hover {
+	border-color: #4da8da;
+}
+
+/* Список файлов */
+.file-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+	justify-content: center;
+	margin-top: 20px;
+}
+
+.file-item {
+	background: rgba(255, 255, 255, 0.08);
+	border-radius: 12px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+	padding: 15px;
+	text-align: center;
+	width: 200px;
+	transition: box-shadow 0.3s ease-in-out;
+}
+
+.file-item:hover {
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+}
+
+.file-item img {
+	max-width: 100%;
+	max-height: 150px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	object-fit: cover;
+}
+
+.file-item video {
+	max-width: 100%;
+	max-height: 150px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+	object-fit: cover;
+}
+
+.file-item embed {
+	max-width: 100%;
+	max-height: 150px;
+	border-radius: 8px;
+	margin-bottom: 10px;
+}
+
+.file-item p {
+	margin: 5px 0;
+	font-size: 14px;
+}
+
+.file-item a {
+	display: inline-block;
+	margin-top: 10px;
+	background-color: rgba(0, 123, 255, 0.8);
+	color: #fff;
+	border: none;
+	padding: 8px 15px;
+	font-size: 14px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.file-item a:hover {
+	background-color: rgba(0, 123, 255, 1);
+}
+
+.file-item form {
+	display: inline-block;
+	margin-top: 10px;
+}
+
+.file-item form button {
+	background-color: rgba(255, 77, 77, 0.8);
+	color: #fff;
+	border: none;
+	padding: 8px 15px;
+	font-size: 14px;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: background-color 0.3s ease-in-out;
+}
+
+.file-item form button:hover {
+	background-color: rgba(255, 77, 77, 1);
+}
+
+/* Сообщения */
+.message-box {
+	position: fixed;
+	top: 20px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 15px 20px;
+	border-radius: 8px;
+	color: #fff;
+	z-index: 1000;
+	opacity: 1;
+	transition: opacity 0.5s ease-in-out;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.message-box.success {
+	background-color: rgba(46, 204, 113, 0.8);
+}
+
+.message-box.error {
+	background-color: rgba(231, 76, 60, 0.8);
+}
+
+/* Анимация появления */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.modal {
+	display: none;
+	position: fixed;
+	z-index: 1000;
+	left: 50%;
+	top: 20px;
+	transform: translateX(-50%);
+	width: auto;
+	height: auto;
+	overflow: auto;
+	background-color: rgba(60, 112, 55, 0.9);
+}
+
+.modal-content {
+	background-color: #3c7037;
+	margin: 0;
+	padding: 20px;
+	border: 1px solid #888;
+	width: auto;
+	animation: fadeIn 0.5s ease-in-out; /* Add fade-in animation */
+	border-radius: 12px; /* Rounded corners */
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); /* Shadow for depth */
+}
+
+.close-button {
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+	background-color: transparent; /* Transparent background */
+	border: none; /* No border */
+	cursor: pointer; /* Pointer cursor */
+	font-size: 28px; /* Font size */
+}
+
+.close-button:hover {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
