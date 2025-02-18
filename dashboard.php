@@ -47,23 +47,51 @@ $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <?php
                     $filePath = "uploads/" . htmlspecialchars($file['filename']);
                     $fileExt = pathinfo($filePath, PATHINFO_EXTENSION);
-                    if (in_array($fileExt, ['jpg', 'jpeg', 'png', 'gif', 'jfif'])):
+                    if (in_array($fileExt, ['jpg', 'jpeg', 'png', 'gif', 'jfif', 'webp', 'tiff', 'svg'])):
+
                         ?>
                         <img src="<?php echo $filePath; ?>" alt="<?php echo htmlspecialchars($file['filename']); ?>">
-                    <?php elseif (in_array($fileExt, ['mp4', 'webm'])): ?>
+                    <?php elseif (in_array($fileExt, ['mp4', 'webm', 'mov', 'avi', 'mkv'])): ?>
+
                         <video controls>
                             <source src="<?php echo $filePath; ?>" type="video/<?php echo $fileExt; ?>">
                             Ваш браузер не поддерживает видео.
                         </video>
                     <?php elseif (in_array($fileExt, ['pdf'])): ?>
                         <embed src="<?php echo $filePath; ?>" type="application/pdf" width="100%" height="150px">
+                    <?php elseif (in_array($fileExt, ['doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'])): ?>
+                        <div class="document-preview">
+                            <i class="document-icon"></i>
+                            <p>Document: <?php echo htmlspecialchars($file['filename']); ?></p>
+                        </div>
+
                     <?php else: ?>
-                        <p><?php echo htmlspecialchars($file['filename']); ?></p>
+                        <div class="file-icon">
+                            <?php
+                            $iconClass = 'file';
+                            if (in_array($fileExt, ['txt', 'doc', 'docx', 'rtf'])) {
+                                $iconClass = 'file-text';
+                            } elseif (in_array($fileExt, ['zip', 'rar', '7z', 'tar', 'gz'])) {
+                                $iconClass = 'file-archive';
+                            } elseif (in_array($fileExt, ['xls', 'xlsx', 'csv'])) {
+                                $iconClass = 'file-excel';
+                            } elseif (in_array($fileExt, ['ppt', 'pptx'])) {
+                                $iconClass = 'file-powerpoint';
+                            } elseif (in_array($fileExt, ['mp3', 'wav', 'ogg', 'aac'])) {
+                                $iconClass = 'file-audio';
+                            }
+                            ?>
+                            <i class="file-icon-<?php echo $iconClass; ?>"></i>
+                            <p><?php echo htmlspecialchars($file['filename']); ?></p>
+                        </div>
+
                     <?php endif; ?>
                     <p><?php echo htmlspecialchars($file['filename']); ?></p>
                     <p>Загружено пользователем: <?php echo htmlspecialchars($file['uploader']); ?></p>
                     <a href="<?php echo $filePath; ?>" download>Загрузить</a>
+                    <a href="<?php echo $filePath; ?>" target="_blank" class="btn-preview">Просмотр</a>
                     <form action="delete.php" method="post" style="display: inline;">
+
                         <input type="hidden" name="file_id" value="<?php echo htmlspecialchars($file['id']); ?>">
                         <button type="submit" class="btn btn-delete">Удалить</button>
                     </form>

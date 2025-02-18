@@ -84,34 +84,68 @@ async function fetchFiles() {
 }
 
 function showMessage(msg, type) {
-	const modal = document.getElementById('messageModal');
-	const modalMessage = document.getElementById('modalMessage');
-	const closeButton = document.querySelector('.close-button');
+	// Create message box if it doesn't exist
+	let messageBox = document.getElementById('messageBox');
+	if (!messageBox) {
+		messageBox = document.createElement('div');
+		messageBox.id = 'messageBox';
+		messageBox.className = `message-box ${type}`;
+		document.body.appendChild(messageBox);
+	}
 
-	modalMessage.textContent = msg.includes('success')
-		? 'Success: ' + msg
-		: 'Error: ' + msg.includes('error')
-		? 'Error: ' + msg
-		: msg;
+	// Set message content and styling
+	messageBox.textContent = msg;
+	messageBox.className = `message-box ${type}`;
+	messageBox.style.display = 'block';
+	messageBox.style.opacity = '1';
 
-	modal.style.display = 'block';
-
-	// Remove close button functionality
-	// Automatically hide the modal after 2 seconds
+	// Automatically hide the message after 3 seconds
 	setTimeout(() => {
-		modal.style.display = 'none';
-		location.reload(); // Refresh the page to update the file list
-	}, 500);
-
-	// Remove window click functionality to close the modal
+		messageBox.style.opacity = '0';
+		setTimeout(() => {
+			messageBox.style.display = 'none';
+		}, 300);
+	}, 3000);
 }
 
-document
-	.getElementById('openUploadModal')
-	.addEventListener('click', function () {
-		document.getElementById('uploadModal').style.display = 'block';
+
+// Initialize file list on page load
+document.addEventListener('DOMContentLoaded', () => {
+	fetchFiles();
+	
+	// Setup delete button handlers
+	document.querySelectorAll('.btn-delete').forEach(button => {
+		button.addEventListener('click', async e => {
+			e.preventDefault();
+			const form = button.closest('form');
+			const formData = new FormData(form);
+			const response = await fetch('delete.php', {
+				method: 'POST',
+				body: formData,
+			});
+			const result = await response.json();
+			showMessage(
+				result.error || result.success,
+				result.error ? 'error' : 'success'
+			);
+			fetchFiles(); // Refresh file list after deletion
+		});
 	});
 
-document.querySelector('.close-button').addEventListener('click', function () {
-	document.getElementById('uploadModal').style.display = 'none';
+	// Setup upload button handler
+	document.getElementById('uploadButton').addEventListener('click', async e => {
+		e.preventDefault();
+		const form = document.getElementById('uploadForm');
+		const formData = new FormData(form);
+		const response = await fetch('upload.php', {
+			method: 'POST',
+			body: formData,
+		});
+		const result = await response.json();
+		showMessage(
+			result.error || result.success,
+			result.error ? 'error' : 'success'
+		);
+		fetchFiles(); // Refresh file list after upload
+	});
 });

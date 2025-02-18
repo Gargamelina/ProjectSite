@@ -27,6 +27,10 @@ $files = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="assets/styles.css">
 </head>
 <body>
+<video class="video-background" autoplay loop muted>
+        <source src="assets/video/vecteezy_animated-background-fluid-gradient-suitable-for-advertising_37193227.mp4" type="video/mp4">
+        Ваш браузер не поддерживает видео.
+    </video>
     <div class="container">
 
         <div class="banner">

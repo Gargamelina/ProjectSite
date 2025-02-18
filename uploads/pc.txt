@@ -1,0 +1,1 @@
+vless://0777711990bd4c458f1e3a54cbcb9867@91.231.186.50:443?security=reality&sni=nytimes.com&alpn=h2&fp=chrome&pbk=R65cA5_GSdCrd-WIVUh6p0Wmxug2Ne6oVCWzwxD-uRc&sid=aabbccdd&type=tcp&flow=xtls-rprx-vision&encryption=none#🇬🇧PREM-LONDON
